@@ -1,0 +1,5 @@
+# Minimal requirements - only essential packages
+openai-whisper
+moviepy
+pysrt
+numpy 
