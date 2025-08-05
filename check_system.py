@@ -81,7 +81,7 @@ def check_required_packages():
     packages = [
         ("whisper", "whisper"),
         ("moviepy", "moviepy"),
-        ("googletrans", "googletrans"),
+        ("deep-translator", "deep_translator"),
         ("pysrt", "pysrt"),
         ("torch", "torch"),
         ("torchaudio", "torchaudio")

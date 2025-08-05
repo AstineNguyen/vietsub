@@ -9,14 +9,19 @@ from pathlib import Path
 import time
 import re
 
-try:
-    import whisper
-    import moviepy.editor as mp
-    from googletrans import Translator
-    import pysrt
-    DEPENDENCIES_OK = True
-except ImportError:
-    DEPENDENCIES_OK = False
+def check_dependencies():
+    """Check if all dependencies are available"""
+    try:
+        import whisper
+        import moviepy.editor as mp
+        from deep_translator import GoogleTranslator
+        import pysrt
+        return True
+    except ImportError:
+        return False
+
+# Initial check
+DEPENDENCIES_OK = check_dependencies()
 
 class VideoSubtitleTool:
     def __init__(self, root):
@@ -26,7 +31,7 @@ class VideoSubtitleTool:
         self.root.configure(bg='#1e1e1e')
         
         # Variables
-        self.video_path = tk.StringVar()
+        self.video_path = tk.StringVar()  
         self.output_folder = tk.StringVar(value=str(Path.cwd()))
         self.progress_var = tk.DoubleVar()
         self.status_text = tk.StringVar(value="Ready to process video...")
@@ -42,7 +47,9 @@ class VideoSubtitleTool:
         # Setup UI
         self.setup_ui()
         
-        # Check dependencies on startup
+        # Check dependencies on startup (refresh check)
+        global DEPENDENCIES_OK
+        DEPENDENCIES_OK = check_dependencies()
         if not DEPENDENCIES_OK:
             self.show_install_dependencies()
     
@@ -381,7 +388,7 @@ class VideoSubtitleTool:
             
             # Step 3: Translate to Vietnamese
             self.update_status("Translating to Vietnamese...", 60)
-            translator = Translator()
+            translator = GoogleTranslator(source='zh', target='vi')
             subtitles = self.create_subtitles(result, translator)
             
             # Step 4: Save subtitle file
@@ -431,8 +438,7 @@ class VideoSubtitleTool:
             
             try:
                 # Translate to Vietnamese
-                translation = translator.translate(chinese_text, src='zh', dest='vi')
-                vietnamese_text = translation.text
+                vietnamese_text = translator.translate(chinese_text)
                 
                 # Break long lines
                 if len(vietnamese_text) > max_length:
@@ -510,7 +516,7 @@ class VideoSubtitleTool:
 Required packages:
 • openai-whisper (for speech recognition)
 • moviepy (for video processing)
-• googletrans (for translation)
+• deep-translator (for translation)
 • pysrt (for subtitle files)
 
 Click 'Install' to install automatically."""
@@ -527,7 +533,7 @@ Click 'Install' to install automatically."""
         packages = [
             "openai-whisper",
             "moviepy", 
-            "googletrans==4.0.0rc1",
+            "deep-translator",
             "pysrt"
         ]
         
