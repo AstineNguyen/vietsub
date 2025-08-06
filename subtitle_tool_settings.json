@@ -1,0 +1,12 @@
+{
+  "model": "base",
+  "max_length": "80",
+  "enable_ocr": true,
+  "ocr_interval": "2.0",
+  "overlay_video": true,
+  "export_srt": false,
+  "export_transcript": false,
+  "export_ocr_only": false,
+  "auto_output_folder": true,
+  "output_folder": "C:\\Users\\Linh Nguyen\\Downloads"
+}

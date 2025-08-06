@@ -1,43 +1,53 @@
-# 🎬 Video Subtitle Tool - Chinese to Vietnamese
+# 🎬 Enhanced Video Subtitle Tool V2
 
-**Công cụ tự động tạo phụ đề tiếng Việt từ video tiếng Trung sử dụng AI**
+**Công cụ tự động tạo phụ đề tiếng Việt từ video tiếng Trung sử dụng AI với giao diện hiện đại**
 
-![Python](https://img.shields.io/badge/python-3.8+-blue.svg) ![Whisper](https://img.shields.io/badge/Whisper-AI-green.svg) ![Status](https://img.shields.io/badge/status-ready-brightgreen.svg)
+![Python](https://img.shields.io/badge/python-3.8+-blue.svg) ![Whisper](https://img.shields.io/badge/Whisper-AI-green.svg) ![OpenCV](https://img.shields.io/badge/OpenCV-4.8+-red.svg) ![Status](https://img.shields.io/badge/status-ready-brightgreen.svg)
 
 ---
 
 ## 🚀 Quick Start
 
-### 1. Kiểm tra hệ thống
-```bash
-python check_system.py
-```
-
-### 2. Cài đặt dependencies
+### 1. Cài đặt dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Chạy tool
+### 2. Chạy tool
 ```bash
-# Cách 1: Chạy trực tiếp
-python video_subtitle_tool.py
+# Cách 1: Double-click (Windows) - Khuyên dùng
+run_enhanced_tool_v2.bat
 
-# Cách 2: Double-click (Windows)
-run_subtitle_tool.bat
+# Cách 2: Chạy trực tiếp
+python enhanced_video_subtitle_tool_v2.py
 ```
 
 ---
 
 ## ✨ Tính năng chính
 
+### 🎯 **Core Features**
 - 🎵 **Trích xuất audio** tự động từ video
 - 🗣️ **Nhận dạng giọng nói** tiếng Trung bằng Whisper AI
-- 🌐 **Dịch tự động** sang tiếng Việt
-- 📝 **Tạo phụ đề .srt** với timing chính xác
-- 🎨 **Giao diện modern** với dark theme
-- 📊 **Real-time progress** và logging
-- ⚙️ **Tùy chỉnh model AI** và format
+- 👁️ **OCR Text Detection** từ video frames
+- 🌐 **Dịch tự động** sang tiếng Việt (Google Translate)
+- 📝 **Xuất nhiều định dạng**: SRT, Transcript, OCR-only
+- 🎬 **Video với phụ đề burnt-in** (sử dụng OpenCV)
+
+### 🎨 **UI/UX Enhancements**
+- 🖤 **Dark theme** hiện đại và đẹp mắt
+- 📊 **Real-time progress** với log chi tiết
+- ⚙️ **Tabbed settings** dễ sử dụng
+- 🛑 **Stop/Cancel** processing bất cứ lúc nào
+- 💾 **Session memory** - ghi nhớ cài đặt
+- 📁 **Smart output management**
+
+### 🔧 **Advanced Settings**
+- 🤖 **5 Whisper models** (tiny → large)
+- 👁️ **OCR interval** tùy chỉnh
+- 📏 **Max line length** cho phụ đề
+- 📤 **Flexible export options**
+- 🎯 **Custom output filename**
 
 ---
 
@@ -48,89 +58,71 @@ run_subtitle_tool.bat
 - **FFmpeg** (để xử lý video/audio)
 - **Internet connection** (để tải models và dịch thuật)
 
-### Thư viện Python:
-- `openai-whisper` - Speech-to-text AI
-- `moviepy` - Video processing  
-- `googletrans` - Translation service
-- `pysrt` - Subtitle file handling
-- `torch` & `torchaudio` - AI model backend
+### Tùy chọn (cho OCR):
+- **Tesseract OCR** (Windows: tự động detect ở `C:\Program Files\Tesseract-OCR\`)
 
 ---
 
-## 📖 Hướng dẫn sử dụng
+## 🎯 Supported Formats
 
-### Chuẩn bị video:
-- **Format**: MP4, AVI, MOV, MKV (khuyến nghị MP4)
-- **Audio quality**: Rõ ràng, ít noise
-- **Duration**: Test với video < 10 phút lần đầu
+### Video Input:
+- `.mp4`, `.avi`, `.mov`, `.mkv`, `.wmv`, `.flv`
 
-### Quy trình xử lý:
-1. **Select video** → Browse file video
-2. **Choose output** → Thư mục lưu phụ đề
-3. **Configure settings**:
-   - **Model**: `tiny` (fast) → `large` (accurate)
-   - **Max length**: Độ dài dòng phụ đề (default: 80)
-4. **Start processing** → Click "🚀 Generate Subtitles"
-5. **Get result** → File `.srt` trong output folder
+### Output Files:
+- **SRT**: File phụ đề chuẩn
+- **Transcript**: Kết hợp audio + OCR text
+- **OCR-only**: Chỉ text từ video
+- **Video**: MP4 với phụ đề burnt-in
 
 ---
 
-## ⚙️ Cấu hình nâng cao
+## 💡 Cách sử dụng
 
-### Whisper Models:
-| Model | Speed | Accuracy | Size | Use Case |
-|-------|--------|----------|------|----------|
-| `tiny` | ⚡⚡⚡ | ⭐⭐ | ~39MB | Quick test |
-| `base` | ⚡⚡ | ⭐⭐⭐ | ~74MB | **Recommended** |
-| `small` | ⚡ | ⭐⭐⭐⭐ | ~244MB | Good quality |
-| `medium` | 🐌 | ⭐⭐⭐⭐⭐ | ~769MB | High accuracy |
-| `large` | 🐌🐌 | ⭐⭐⭐⭐⭐ | ~1550MB | Best quality |
+### 1. **Khởi động**
+- Chạy `run_enhanced_tool_v2.bat` hoặc `python enhanced_video_subtitle_tool_v2.py`
+- Cài đặt từ lần trước sẽ được tự động khôi phục
 
-### Performance Tips:
-- **Video < 15 min**: Tối ưu cho xử lý nhanh
-- **Good audio**: Clean audio = Better accuracy
-- **Stable internet**: Cần thiết cho translation
-- **RAM**: ≥8GB cho model `medium`/`large`
+### 2. **Chọn video**
+- Click "Browse" để chọn file video
+- Output folder sẽ tự động được set theo video (có thể thay đổi)
+
+### 3. **Cấu hình**
+- **AI Model**: Chọn Whisper model (base khuyên dùng)
+- **OCR Settings**: Bật/tắt OCR và set interval
+- **Export Options**: **Bắt buộc chọn ít nhất 1 option**
+- **Output Settings**: Custom filename và folder
+
+### 4. **Xử lý**
+- Click "🚀 Generate Enhanced Subtitles"
+- Theo dõi progress và log
+- Có thể dừng bất cứ lúc nào với "⏹️ Stop Processing"
+
+### 5. **Kết quả**
+- Files được lưu trong output folder
+- Cài đặt tự động được lưu cho lần sau
 
 ---
 
-## 🛠️ Khắc phục sự cố
+## 🛠️ Troubleshooting
 
-### "Python not found"
+### Lỗi thường gặp:
+
+**1. "Some required packages are missing"**
 ```bash
-# Cài Python từ python.org (nhớ tick "Add to PATH")
-python --version
+pip install -r requirements.txt
 ```
 
-### "FFmpeg not found"  
-```bash
-# Windows (Chocolatey)
-choco install ffmpeg
+**2. "FFmpeg not found"**
+- Windows: Tải FFmpeg và thêm vào PATH
+- Hoặc cài qua: `pip install ffmpeg-python`
 
-# Windows (Manual)
-# Download từ: https://ffmpeg.org/download.html
-# Add to System PATH
+**3. "OCR not working"**
+- Cài Tesseract OCR cho Windows
+- Hoặc tắt OCR trong settings
 
-# Test
-ffmpeg -version
-```
-
-### "Module not found"
-```bash
-pip install -r requirements.txt --upgrade
-```
-
-### Tool runs slow
-- Use smaller model (`tiny`, `base`)
-- Shorter videos (<15min)
-- Check internet speed
-- Close other heavy applications
-
-### Poor subtitle quality
-- Use larger model (`small`, `medium`)
-- Ensure clear audio
-- Check if video is actually Chinese
-- Try different audio enhancement
+**4. "Translation failed"**
+- Kiểm tra internet connection
+- Google Translate có thể bị rate limit
 
 ---
 
@@ -138,54 +130,57 @@ pip install -r requirements.txt --upgrade
 
 ```
 VideoSubtitleTool/
-├── video_subtitle_tool.py    # Main application
-├── check_system.py           # System requirements checker
-├── requirements.txt          # Python dependencies
-├── run_subtitle_tool.bat     # Windows batch launcher
-├── README.md                 # This file
-├── README_SUBTITLE_TOOL.md   # Detailed documentation
-└── QUICK_START.md           # Setup guide
+├── enhanced_video_subtitle_tool_v2.py  # 🎯 Main application
+├── run_enhanced_tool_v2.bat           # 🚀 Windows launcher
+├── requirements.txt                   # 📦 Dependencies
+├── README.md                         # 📖 This file
+├── FEATURES_UPDATE.md                # 📝 New features docs
+└── subtitle_tool_settings.json      # ⚙️ User settings (auto-created)
 ```
 
 ---
 
-## 🤝 Hỗ trợ
+## 🔄 Updates & Features
 
-### Debugging:
-1. **System check**: `python check_system.py`
-2. **Check logs**: Xem processing log trong UI
-3. **Test connectivity**: `ping google.com`
-4. **Verify packages**: `pip list | findstr whisper`
-
-### Common Issues:
-- **Long processing**: Normal for first run (downloading models)
-- **Translation errors**: Check internet, try again later
-- **Poor accuracy**: Use larger model, better audio quality
-- **Memory errors**: Use smaller model or shorter video
+Xem file `FEATURES_UPDATE.md` để biết chi tiết về:
+- 🛑 Stop/Cancel functionality
+- 💾 Session memory system
+- ❌ Export options changes
+- 🔧 UI/UX improvements
 
 ---
 
-## 📝 Notes
+## ⚡ Performance Tips
 
-- **First run**: Whisper downloads models (~100MB-1.5GB)
-- **Processing time**: ~20-40% of video duration
-- **Output format**: Standard SRT compatible with all players
-- **Languages**: Currently Chinese → Vietnamese only
+1. **Model Selection**:
+   - `tiny`: Nhanh nhất, độ chính xác thấp
+   - `base`: **Khuyên dùng** - cân bằng tốt
+   - `small/medium`: Chậm hơn, chính xác hơn
+   - `large`: Chậm nhất, chính xác nhất
 
----
+2. **OCR Settings**:
+   - Interval 2.0s: Cân bằng tốt
+   - Interval thấp: Nhiều text hơn, chậm hơn
+   - Tắt OCR: Nhanh hơn nếu video không có text
 
-## 🎉 Ready to go!
-
-```bash
-# Quick test workflow:
-cd VideoSubtitleTool
-python check_system.py          # ✅ Verify setup
-python video_subtitle_tool.py   # 🚀 Launch tool
-# Select test video < 10min, use 'base' model
-```
-
-**Happy subtitling! 🎬✨**
+3. **Export Options**:
+   - Chỉ chọn những format cần thiết
+   - Video overlay mất thời gian lâu nhất
 
 ---
 
-*Created with ❤️ for seamless video subtitle generation* 
+## 📞 Support
+
+- 🐛 **Bug reports**: Tạo issue với log chi tiết
+- 💡 **Feature requests**: Mô tả rõ tính năng mong muốn
+- ❓ **Questions**: Kiểm tra README và docs trước
+
+---
+
+## 📄 License
+
+MIT License - Free to use and modify
+
+---
+
+**Made with ❤️ using Python, Whisper AI, OpenCV, and modern UI principles** 

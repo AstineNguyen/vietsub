@@ -1,9 +1,0 @@
-# Updated requirements with deep-translator (more stable than googletrans)
-openai-whisper
-torch
-torchaudio
-moviepy
-pysrt
-numpy
-deep-translator
-ffmpeg-python 
